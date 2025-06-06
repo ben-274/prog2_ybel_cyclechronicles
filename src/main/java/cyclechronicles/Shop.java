@@ -64,6 +64,12 @@ public class Shop {
      * @return any finished order for given customer, {@code Optional.empty()} if none found
      */
     public Optional<Order> deliver(String c) {
-        throw new UnsupportedOperationException();
+    	return completedOrders.stream()
+    			.filter(order -> order.getCustomer().equals(c))
+    			.findFirst()
+    			.map(order -> {
+    				completedOrders.remove(order);
+    				return order;
+    			});
     }
 }
