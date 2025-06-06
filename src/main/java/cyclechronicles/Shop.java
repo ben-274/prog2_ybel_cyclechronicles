@@ -44,7 +44,14 @@ public class Shop {
      * @return finished order
      */
     public Optional<Order> repair() {
-        throw new UnsupportedOperationException();
+        Order o = pendingOrders.poll();
+        if(o == null) {
+        	return Optional.empty();
+        }
+        
+        completedOrders.add(o);
+        
+        return Optional.ofNullable(o);
     }
 
     /**
